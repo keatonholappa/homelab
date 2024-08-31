@@ -14,7 +14,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_1:-manager}
+          - node.role == ${NODE_ROLE_1}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.lidarr.entrypoints=http"
@@ -43,7 +43,7 @@ services:
   #   deploy:
   #     placement:
   #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}
+  #         - node.role == ${NODE_ROLE_1}
   #     labels:
   #     - "traefik.enable=true"
   #     - "traefik.http.routers.sonarr.entrypoints=http"
@@ -74,7 +74,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_1:-manager}
+          - node.role == ${NODE_ROLE_1}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.entrypoints=http"
@@ -127,7 +127,7 @@ services:
   #     replicas: 1
   #     placement:
   #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}
+  #         - node.role == ${NODE_ROLE_1}
   #     labels:
   #     - "traefik.enable=true"
   #     - "traefik.http.routers.tdarr.entrypoints=http"
@@ -183,7 +183,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_2:-manager}
+          - node.role == ${NODE_ROLE_2}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.qBittorrentVpn.entrypoints=http"
@@ -214,7 +214,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_1:-manager}
+          - node.role == ${NODE_ROLE_1}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.prowlarr.entrypoints=http"
@@ -245,7 +245,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_1:-manager}    
+          - node.role == ${NODE_ROLE_1}    
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.jellyseer.entrypoints=http"
@@ -274,7 +274,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE_1:-manager}
+          - node.role == ${NODE_ROLE_1}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.homarr.entrypoints=http"
