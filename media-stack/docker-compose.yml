@@ -1,34 +1,34 @@
 version: '3.2'
 
 services:  
-  # lidarr:
-  #   image: binhex/arch-lidarr:${LIDARR_TAG:-latest}
-  #   environment:
-  #     - TZ=America/New_York
-  #   networks:
-  #     - proxy
-  #   volumes:
-  #     - lidarr-config:/config
-  #     - media-temp:/data # media temp files 
-  #     - media-source:/media # media temp files 
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}
-  #     labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.lidarr.entrypoints=http"
-  #     - "traefik.http.routers.lidarr.rule=Host(`lidarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.middlewares.lidarr-https-redirect.redirectscheme.scheme=https"
-  #     - "traefik.http.routers.lidarr-secure.middlewares=middlewares-authentik@file"
-  #     - "traefik.http.routers.lidarr.middlewares=lidarr-https-redirect"
-  #     - "traefik.http.routers.lidarr-secure.entrypoints=https"
-  #     - "traefik.http.routers.lidarr-secure.rule=Host(`lidarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.routers.lidarr-secure.tls=true"
-  #     - "traefik.http.routers.lidarr-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.lidarr-secure.service=lidarr"
-  #     - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
-  #     - "traefik.docker.network=proxy"
+  lidarr:
+    image: binhex/arch-lidarr:${LIDARR_TAG:-latest}
+    environment:
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - lidarr-config:/config
+      - media-temp:/data # media temp files 
+      - media-source:/media # media temp files 
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1:-manager}
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lidarr.entrypoints=http"
+      - "traefik.http.routers.lidarr.rule=Host(`lidarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.middlewares.lidarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.lidarr-secure.middlewares=middlewares-authentik@file"
+      - "traefik.http.routers.lidarr.middlewares=lidarr-https-redirect"
+      - "traefik.http.routers.lidarr-secure.entrypoints=https"
+      - "traefik.http.routers.lidarr-secure.rule=Host(`lidarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.routers.lidarr-secure.tls=true"
+      - "traefik.http.routers.lidarr-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.lidarr-secure.service=lidarr"
+      - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
+      - "traefik.docker.network=proxy"
 
   # sonarr:
   #   image: binhex/arch-sonarr${SONARR_TAG:-latest}
@@ -75,7 +75,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == ${NODE_ROLE}:
+          - node.role == ${NODE_ROLE_1:-manager}
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.entrypoints=http"
@@ -144,155 +144,155 @@ services:
   #     - "traefik.http.services.tdarr.loadbalancer.server.port=8265"
   #     - "traefik.docker.network=proxy"
 
-  # qBittorrentVpn:
-  #   image: binhex/arch-qbittorrentvpn:${QBITTORRENT_TAG:-latest}
-  #   cap_add: 
-  #     - NET_ADMIN
-  #   privileged: true
-  #   environment:
-  #     #- TZ=America/New_York
-  #     - VPN_ENABLED=yes
-  #     - VPN_USER=/run/secrets/VPN_USERNAME
-  #     - VPN_PASS=/run/secrets/VPN_PASSWORD
-  #     - VPN_PROV=/run/secrets/VPN_PROVIDER
-  #     - VPN_CLIENT=openvpn
-  #     #- STRICT_PORT_FORWARD=yes
-  #     - ENABLE_PRIVOXY=no
-  #     - ENABLE_STARTUP_SCRIPTS=yes
-  #     - LAN_NETWORK=10.16.0.0/24,10.1.10.0/24,10.1.20.0/24
-  #     - WEBUI_PORT=8082
-  #     - 'NAME_SERVERS=84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1'
-  #     # - VPN_INPUT_PORTS=1234
-  #     # - VPN_OUTPUT_PORTS=5678
-  #     - DEBUG=true
-  #     - UMASK=000
-  #   secrets:
-  #     - VPN_PROVIDER
-  #     - VPN_USERNAME
-  #     - VPN_PASSWORD
-  #   networks:
-  #     - proxy
-  #   ports:
-  #     - "58946:58946"
-  #     - "58946:58946/udp"
-  #     - "8082:8082"
-  #     - "8118:8118"
-  #   volumes:
-  #     - qBittorrentVpn-config:/config
-  #     - media-temp:/data # media temp files
-  #     - /etc/localtime:/etc/localtime:ro
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_2:-manager}
-  #     labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.qBittorrentVpn.entrypoints=http"
-  #     - "traefik.http.routers.qBittorrentVpn.rule=Host(`torrent.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.middlewares.qBittorrentVpn-https-redirect.redirectscheme.scheme=https"
-  #     # - "traefik.http.routers.qBittorrentVpn-secure.middlewares=middlewares-authentik@file"
-  #     - "traefik.http.routers.qBittorrentVpn.middlewares=qBittorrentVpn-https-redirect"
-  #     - "traefik.http.routers.qBittorrentVpn-secure.entrypoints=https"
-  #     - "traefik.http.routers.qBittorrentVpn-secure.rule=Host(`torrent.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.routers.qBittorrentVpn-secure.tls=true"
-  #     - "traefik.http.routers.qBittorrentVpn-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.qBittorrentVpn-secure.service=qBittorrentVpn"
-  #     - "traefik.http.services.qBittorrentVpn.loadbalancer.server.port=8082"
-  #     - "traefik.docker.network=proxy"
-  #     - "traefik.docker.lbswarm=true"      
+  qBittorrentVpn:
+    image: binhex/arch-qbittorrentvpn:${QBITTORRENT_TAG:-latest}
+    cap_add: 
+      - NET_ADMIN
+    privileged: true
+    environment:
+      #- TZ=America/New_York
+      - VPN_ENABLED=yes
+      - VPN_USER=/run/secrets/VPN_USERNAME
+      - VPN_PASS=/run/secrets/VPN_PASSWORD
+      - VPN_PROV=/run/secrets/VPN_PROVIDER
+      - VPN_CLIENT=openvpn
+      #- STRICT_PORT_FORWARD=yes
+      - ENABLE_PRIVOXY=no
+      - ENABLE_STARTUP_SCRIPTS=yes
+      - LAN_NETWORK=10.16.0.0/24,10.1.10.0/24,10.1.20.0/24
+      - WEBUI_PORT=8082
+      - 'NAME_SERVERS=84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1'
+      # - VPN_INPUT_PORTS=1234
+      # - VPN_OUTPUT_PORTS=5678
+      - DEBUG=true
+      - UMASK=000
+    secrets:
+      - VPN_PROVIDER
+      - VPN_USERNAME
+      - VPN_PASSWORD
+    networks:
+      - proxy
+    ports:
+      - "58946:58946"
+      - "58946:58946/udp"
+      - "8082:8082"
+      - "8118:8118"
+    volumes:
+      - qBittorrentVpn-config:/config
+      - media-temp:/data # media temp files
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_2:-manager}
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qBittorrentVpn.entrypoints=http"
+      - "traefik.http.routers.qBittorrentVpn.rule=Host(`torrent.local.${DOMAIN_TLD}`)"
+      - "traefik.http.middlewares.qBittorrentVpn-https-redirect.redirectscheme.scheme=https"
+      # - "traefik.http.routers.qBittorrentVpn-secure.middlewares=middlewares-authentik@file"
+      - "traefik.http.routers.qBittorrentVpn.middlewares=qBittorrentVpn-https-redirect"
+      - "traefik.http.routers.qBittorrentVpn-secure.entrypoints=https"
+      - "traefik.http.routers.qBittorrentVpn-secure.rule=Host(`torrent.local.${DOMAIN_TLD}`)"
+      - "traefik.http.routers.qBittorrentVpn-secure.tls=true"
+      - "traefik.http.routers.qBittorrentVpn-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.qBittorrentVpn-secure.service=qBittorrentVpn"
+      - "traefik.http.services.qBittorrentVpn.loadbalancer.server.port=8082"
+      - "traefik.docker.network=proxy"
+      - "traefik.docker.lbswarm=true"      
 
-  # prowlarr:
-  #   image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG:-latest}
-  #   container_name: prowlarr
-  #   environment:
-  #     - TZ=America/New_York
-  #   volumes:
-  #     - prowlarr-config:/config
-  #   networks:
-  #     - proxy
-  #   # ports:
-  #   #   - 9696:9696
-  #   restart: unless-stopped
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}
-  #     labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.prowlarr.entrypoints=http"
-  #     - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.middlewares.prowlarr-https-redirect.redirectscheme.scheme=https"
-  #     - "traefik.http.routers.prowlarr-secure.middlewares=middlewares-authentik@file"
-  #     - "traefik.http.routers.prowlarr.middlewares=prowlarr-https-redirect"
-  #     - "traefik.http.routers.prowlarr-secure.entrypoints=https"
-  #     - "traefik.http.routers.prowlarr-secure.rule=Host(`prowlarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.routers.prowlarr-secure.tls=true"
-  #     - "traefik.http.routers.prowlarr-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.prowlarr-secure.service=prowlarr"
-  #     - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
-  #     - "traefik.docker.network=proxy"
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG:-latest}
+    container_name: prowlarr
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - prowlarr-config:/config
+    networks:
+      - proxy
+    # ports:
+    #   - 9696:9696
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1:-manager}
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.entrypoints=http"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.middlewares.prowlarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.prowlarr-secure.middlewares=middlewares-authentik@file"
+      - "traefik.http.routers.prowlarr.middlewares=prowlarr-https-redirect"
+      - "traefik.http.routers.prowlarr-secure.entrypoints=https"
+      - "traefik.http.routers.prowlarr-secure.rule=Host(`prowlarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.routers.prowlarr-secure.tls=true"
+      - "traefik.http.routers.prowlarr-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.prowlarr-secure.service=prowlarr"
+      - "traefik.http.services.prowlarr.loadbalancer.server.port=9696"
+      - "traefik.docker.network=proxy"
 
-  # jellyseerr:
-  #   image: fallenbagel/jellyseerr:${PROWLARR_TAG:-preview-OIDC}
-  #   container_name: jellyseerr
-  #   environment:
-  #   # - LOG_LEVEL=debug
-  #     - TZ=America/New_York
-  #   networks:
-  #     - proxy 
-  # #  ports:
-  # #   - 5055:5055
-  #   volumes:
-  #   - jellyseer_config:/app/config
-  #   restart: unless-stopped
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}    
-  #     labels:
-  #       - "traefik.enable=true"
-  #       - "traefik.http.routers.jellyseer.entrypoints=http"
-  #       - "traefik.http.routers.jellyseer.rule=Host(`requests.${DOMAIN_TLD}`)"
-  #       - "traefik.http.middlewares.jellyseer-https-redirect.redirectscheme.scheme=https"
-  #       - "traefik.http.routers.jellyseer.middlewares=jellyseer-https-redirect"
-  #       - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
-  #       - "traefik.http.routers.jellyseer-secure.entrypoints=https"
-  #       - "traefik.http.routers.jellyseer-secure.rule=Host(`requests.${DOMAIN_TLD}`)"
-  #       - "traefik.http.routers.jellyseer-secure.tls=true"
-  #       - "traefik.http.routers.jellyseer-secure.service=jellyseer"
-  #       - "traefik.http.services.jellyseer.loadbalancer.server.port=5055"
-  #       - "traefik.http.routers.jellyseer-secure.tls.certresolver=cloudflare"
-  #       - "traefik.docker.network=proxy"
+  jellyseerr:
+    image: fallenbagel/jellyseerr:${PROWLARR_TAG:-preview-OIDC}
+    container_name: jellyseerr
+    environment:
+    # - LOG_LEVEL=debug
+      - TZ=America/New_York
+    networks:
+      - proxy 
+  #  ports:
+  #   - 5055:5055
+    volumes:
+    - jellyseer_config:/app/config
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1:-manager}    
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.jellyseer.entrypoints=http"
+        - "traefik.http.routers.jellyseer.rule=Host(`requests.${DOMAIN_TLD}`)"
+        - "traefik.http.middlewares.jellyseer-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.jellyseer.middlewares=jellyseer-https-redirect"
+        - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+        - "traefik.http.routers.jellyseer-secure.entrypoints=https"
+        - "traefik.http.routers.jellyseer-secure.rule=Host(`requests.${DOMAIN_TLD}`)"
+        - "traefik.http.routers.jellyseer-secure.tls=true"
+        - "traefik.http.routers.jellyseer-secure.service=jellyseer"
+        - "traefik.http.services.jellyseer.loadbalancer.server.port=5055"
+        - "traefik.http.routers.jellyseer-secure.tls.certresolver=cloudflare"
+        - "traefik.docker.network=proxy"
 
-  # homarr:
-  #   container_name: homarr
-  #   image: ghcr.io/ajnart/homarr:${HOMARR_TAG:-latest}
-  #   restart: unless-stopped
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-  #     - homarr-data:/app/data/configs
-  #     - homarr-data:/app/public/icons
-  #     - homarr-data:/data
-  #   networks:
-  #     - proxy
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_1:-manager}
-  #     labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.homarr.entrypoints=http"
-  #     - "traefik.http.routers.homarr.rule=Host(`media.${DOMAIN_TLD}`)"
-  #     - "traefik.http.middlewares.homarr-https-redirect.redirectscheme.scheme=https"
-  #     - "traefik.http.routers.homarr-secure.middlewares=middlewares-authentik@file"
-  #     - "traefik.http.routers.homarr.middlewares=homarr-https-redirect"
-  #     - "traefik.http.routers.homarr-secure.entrypoints=https"
-  #     - "traefik.http.routers.homarr-secure.rule=Host(`media.${DOMAIN_TLD}`)"
-  #     - "traefik.http.routers.homarr-secure.tls=true"
-  #     - "traefik.http.routers.homarr-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.homarr-secure.service=homarr"
-  #     - "traefik.http.services.homarr.loadbalancer.server.port=7575"
-  #     - "traefik.docker.network=proxy"  
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:${HOMARR_TAG:-latest}
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - homarr-data:/app/data/configs
+      - homarr-data:/app/public/icons
+      - homarr-data:/data
+    networks:
+      - proxy
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1:-manager}
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homarr.entrypoints=http"
+      - "traefik.http.routers.homarr.rule=Host(`media.${DOMAIN_TLD}`)"
+      - "traefik.http.middlewares.homarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.homarr-secure.middlewares=middlewares-authentik@file"
+      - "traefik.http.routers.homarr.middlewares=homarr-https-redirect"
+      - "traefik.http.routers.homarr-secure.entrypoints=https"
+      - "traefik.http.routers.homarr-secure.rule=Host(`media.${DOMAIN_TLD}`)"
+      - "traefik.http.routers.homarr-secure.tls=true"
+      - "traefik.http.routers.homarr-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.homarr-secure.service=homarr"
+      - "traefik.http.services.homarr.loadbalancer.server.port=7575"
+      - "traefik.docker.network=proxy"  
   
 networks:
   proxy:
