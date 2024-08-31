@@ -155,9 +155,9 @@ services:
     environment:
       #- TZ=America/New_York
       - VPN_ENABLED=yes
-      - VPN_USER=/run/secrets/VPN_USERNAME
-      - VPN_PASS=/run/secrets/VPN_PASSWORD
-      - VPN_PROV=/run/secrets/VPN_PROVIDER
+      - VPN_USER=/run/secrets/vpn_username
+      - VPN_PASS=/run/secrets/vpn_password
+      - VPN_PROV=/run/secrets/vpn_provider
       - VPN_CLIENT=openvpn
       #- STRICT_PORT_FORWARD=yes
       - ENABLE_PRIVOXY=no
@@ -170,9 +170,9 @@ services:
       - DEBUG=true
       - UMASK=000
     secrets:
-      - VPN_PROVIDER
-      - VPN_USERNAME
-      - VPN_PASSWORD
+      - vpn_provider
+      - vpn_username
+      - vpn_password
     networks:
       - proxy
       - media-network
@@ -302,11 +302,11 @@ networks:
     driver: overlay
 
 secrets:
-  VPN_PROVIDER:
+  vpn_provider:
     external: true
-  VPN_USERNAME:
+  vpn_username:
     external: true
-  VPN_PASSWORD:
+  vpn_password:
     external: true
 
 volumes:
