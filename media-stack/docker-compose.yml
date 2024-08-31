@@ -155,9 +155,9 @@ services:
     environment:
       #- TZ=America/New_York
       - VPN_ENABLED=yes
-      - VPN_USER=/run/secrets/vpn_username
-      - VPN_PASS=/run/secrets/vpn_password
-      - VPN_PROV=/run/secrets/vpn_provider
+      - VPN_USER=${VPN_USERNAME}
+      - VPN_PASS=${VPN_PASSWORD}
+      - VPN_PROV=${VPN_PROVIDER}
       - VPN_CLIENT=openvpn
       #- STRICT_PORT_FORWARD=yes
       - ENABLE_PRIVOXY=no
@@ -169,10 +169,7 @@ services:
       # - VPN_OUTPUT_PORTS=5678
       - DEBUG=true
       - UMASK=000
-    secrets:
-      - vpn_provider
-      - vpn_username
-      - vpn_password
+
     networks:
       - proxy
       - media-network
@@ -300,14 +297,6 @@ networks:
     external: true
   media-network:
     driver: overlay
-
-secrets:
-  vpn_provider:
-    external: true
-  vpn_username:
-    external: true
-  vpn_password:
-    external: true
 
 volumes:
   lidarr-config:
