@@ -207,7 +207,6 @@ services:
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG:-latest}
-    container_name: prowlarr
     environment:
       - TZ=America/New_York
     volumes:
@@ -238,7 +237,6 @@ services:
 
   jellyseerr:
     image: fallenbagel/jellyseerr:${PROWLARR_TAG:-preview-OIDC}
-    container_name: jellyseerr
     environment:
     # - LOG_LEVEL=debug
       - TZ=America/New_York
@@ -269,7 +267,6 @@ services:
         - "traefik.docker.network=proxy"
 
   homarr:
-    container_name: homarr
     image: ghcr.io/ajnart/homarr:${HOMARR_TAG:-latest}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
