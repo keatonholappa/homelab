@@ -67,7 +67,6 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
-      - media
     volumes:
       - radarr-config:/config
       - media-temp:/data # media temp files 
@@ -212,7 +211,6 @@ services:
       - proxy
     # ports:
     #   - 9696:9696
-    restart: unless-stopped
     deploy:
       placement:
         constraints:
@@ -244,7 +242,6 @@ services:
   #   - 5055:5055
     volumes:
     - jellyseer_config:/app/config
-    restart: unless-stopped
     deploy:
       placement:
         constraints:
@@ -267,7 +264,6 @@ services:
   homarr:
     container_name: homarr
     image: ghcr.io/ajnart/homarr:${HOMARR_TAG:-latest}
-    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
       - homarr-data:/app/data/configs
