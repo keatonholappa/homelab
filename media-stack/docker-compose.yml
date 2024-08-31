@@ -2,7 +2,7 @@ version: '3.2'
 
 services:  
   lidarr:
-    image: binhex/arch-lidarr:${LIDARR_TAG-:latest}
+    image: binhex/arch-lidarr:${LIDARR_TAG:-latest}
     environment:
       - TZ=America/New_York
     networks:
@@ -31,7 +31,7 @@ services:
       - "traefik.docker.network=proxy"
 
   sonarr:
-    image: binhex/arch-sonarr${SONARR_TAG-:latest}
+    image: binhex/arch-sonarr${SONARR_TAG:-latest}
     environment:
       - TZ=America/New_York
     networks:
@@ -60,7 +60,7 @@ services:
       - "traefik.docker.network=proxy"
 
   radarr:
-    image: binhex/arch-radarr:${RADARR_TAG-:latest}
+    image: binhex/arch-radarr:${RADARR_TAG:-latest}
     environment:
       - PUID=3002
       - PGID=999
@@ -79,12 +79,12 @@ services:
       labels:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.entrypoints=http"
-      - "traefik.http.routers.radarr.rule=Host(`${RADARR_URL-:radarr.local}.${DOMAIN.TLD}`)"
+      - "traefik.http.routers.radarr.rule=Host(`${RADARR_URL:-radarr.local}.${DOMAIN.TLD}`)"
       - "traefik.http.middlewares.radarr-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.routers.radarr-secure.middlewares=middlewares-authentik@file"
       - "traefik.http.routers.radarr.middlewares=radarr-https-redirect"
       - "traefik.http.routers.radarr-secure.entrypoints=https"
-      - "traefik.http.routers.radarr-secure.rule=Host(`${RADARR_URL-radarr.local}.${DOMAIN.TLD}`)"
+      - "traefik.http.routers.radarr-secure.rule=Host(`${RADARR_URL:-radarr.local}.${DOMAIN.TLD}`)"
       - "traefik.http.routers.radarr-secure.tls=true"
       - "traefik.http.routers.radarr-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.radarr-secure.service=radarr"
@@ -92,7 +92,7 @@ services:
       - "traefik.docker.network=proxy"
 
   # tdarr:
-  #   image: ghcr.io/haveagitgat/tdarr:${TDARR_TAG-:latest}
+  #   image: ghcr.io/haveagitgat/tdarr:${TDARR_TAG:-latest}
   #   ports:
   #   #   - 8265:8265 # webUI port (OFF but accessible via Traefik route)
   #     - 8266:8266 # server port
@@ -145,7 +145,7 @@ services:
   #     - "traefik.docker.network=proxy"
 
   qBittorrentVpn:
-    image: binhex/arch-qbittorrentvpn:${QBITTORRENT_TAG-:latest}
+    image: binhex/arch-qbittorrentvpn:${QBITTORRENT_TAG:-latest}
     cap_add: 
       - NET_ADMIN
     privileged: true
@@ -193,7 +193,7 @@ services:
       # - "traefik.http.routers.qBittorrentVpn-secure.middlewares=middlewares-authentik@file"
       - "traefik.http.routers.qBittorrentVpn.middlewares=qBittorrentVpn-https-redirect"
       - "traefik.http.routers.qBittorrentVpn-secure.entrypoints=https"
-      - "traefik.http.routers.qBittorrentVpn-secure.rule=Host(`${QBITTORRENT_URL-:torrent.local}.${DOMAIN.TLD}`)"
+      - "traefik.http.routers.qBittorrentVpn-secure.rule=Host(`${QBITTORRENT_URL:-torrent.local}.${DOMAIN.TLD}`)"
       - "traefik.http.routers.qBittorrentVpn-secure.tls=true"
       - "traefik.http.routers.qBittorrentVpn-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.qBittorrentVpn-secure.service=qBittorrentVpn"
@@ -202,7 +202,7 @@ services:
       - "traefik.docker.lbswarm=true"      
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG-:latest}
+    image: lscr.io/linuxserver/prowlarr:${PROWLARR_TAG:-latest}
     container_name: prowlarr
     environment:
       - TZ=America/New_York
@@ -233,7 +233,7 @@ services:
       - "traefik.docker.network=proxy"
 
   jellyseerr:
-    image: fallenbagel/jellyseerr:${PROWLARR_TAG-:preview-OIDC}
+    image: fallenbagel/jellyseerr:${PROWLARR_TAG:-preview-OIDC}
     container_name: jellyseerr
     environment:
     # - LOG_LEVEL=debug
@@ -266,7 +266,7 @@ services:
 
   homarr:
     container_name: homarr
-    image: ghcr.io/ajnart/homarr:${HOMARR_TAG-:latest}
+    image: ghcr.io/ajnart/homarr:${HOMARR_TAG:-latest}
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
