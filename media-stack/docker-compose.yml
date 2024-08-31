@@ -333,21 +333,21 @@ volumes:
   # tdarr-config:
   #   driver: local
   #   driver_opts:
-  #       type: nfs4
-  #       o: addr=10.16.0.70,rw
-  #       device: ":/mnt/iliad/shares/docker_volumes/media-stack/tdarr/configs"        
+  #       type: none
+  #       o: addr= bind
+  #       device: "/nfs/media-stack/tdarr/configs"        
   # tdarr-server:
   #   driver: local
   #   driver_opts:
-  #       type: nfs4
-  #       o: addr=10.16.0.70,rw
-  #       device: ":/mnt/iliad/shares/docker_volumes/media-stack/tdarr/server"      
+  #       type: none
+  #       o: addr= bind
+  #       device: "/nfs/media-stack/tdarr/server"      
   # tdarr-logs:
   #   driver: local
   #   driver_opts:
-  #       type: nfs4
-  #       o: addr=10.16.0.70,rw
-  #       device: ":/mnt/iliad/shares/docker_volumes/media-stack/tdarr/logs"      
+  #       type: none
+  #       o: addr= bind
+  #       device: "/nfs/media-stack/tdarr/logs"      
   qBittorrentVpn-config:
     driver: local
     driver_opts:
