@@ -245,7 +245,10 @@ services:
     volumes:
     - jellyseer_config:/app/config
     restart: unless-stopped
-    deploy:      
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1:-manager}    
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.jellyseer.entrypoints=http"
