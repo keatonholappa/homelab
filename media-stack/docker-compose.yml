@@ -30,34 +30,34 @@ services:
       - "traefik.http.services.lidarr.loadbalancer.server.port=8686"
       - "traefik.docker.network=proxy"
 
-  # sonarr:
-  #   image: binhex/arch-sonarr${SONARR_TAG:-latest}
-  #   environment:
-  #     - TZ=America/New_York
-  #   networks:
-  #     - proxy
-  #   volumes:
-  #     - sonarr-config:/config
-  #     - media-temp:/data # media temp files 
-  #     - media-source:/media # media temp files 
-  #   deploy:
-  #     placement:
-  #       constraints:
-  #         - node.role == ${NODE_ROLE_1}
-  #     labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.sonarr.entrypoints=http"
-  #     - "traefik.http.routers.sonarr.rule=Host(`sonarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.middlewares.sonarr-https-redirect.redirectscheme.scheme=https"
-  #     - "traefik.http.routers.sonarr-secure.middlewares=middlewares-authentik@file"
-  #     - "traefik.http.routers.sonarr.middlewares=sonarr-https-redirect"
-  #     - "traefik.http.routers.sonarr-secure.entrypoints=https"
-  #     - "traefik.http.routers.sonarr-secure.rule=Host(`sonarr.local.${DOMAIN_TLD}`)"
-  #     - "traefik.http.routers.sonarr-secure.tls=true"
-  #     - "traefik.http.routers.sonarr-secure.tls.certresolver=cloudflare"
-  #     - "traefik.http.routers.sonarr-secure.service=sonarr"
-  #     - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
-  #     - "traefik.docker.network=proxy"
+  sonarr:
+    image: binhex/arch-sonarr${SONARR_TAG:-latest}
+    environment:
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - sonarr-config:/config
+      - media-temp:/data # media temp files 
+      - media-source:/media # media temp files 
+    deploy:
+      placement:
+        constraints:
+          - node.role == ${NODE_ROLE_1}
+      labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=http"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.middlewares.sonarr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.sonarr-secure.middlewares=middlewares-authentik@file"
+      - "traefik.http.routers.sonarr.middlewares=sonarr-https-redirect"
+      - "traefik.http.routers.sonarr-secure.entrypoints=https"
+      - "traefik.http.routers.sonarr-secure.rule=Host(`sonarr.local.${DOMAIN_TLD}`)"
+      - "traefik.http.routers.sonarr-secure.tls=true"
+      - "traefik.http.routers.sonarr-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.sonarr-secure.service=sonarr"
+      - "traefik.http.services.sonarr.loadbalancer.server.port=8989"
+      - "traefik.docker.network=proxy"
 
   radarr:
     image: binhex/arch-radarr:${RADARR_TAG:-latest}
