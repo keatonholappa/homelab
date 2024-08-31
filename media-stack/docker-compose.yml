@@ -275,6 +275,7 @@ services:
       - homarr-data:/data
     networks:
       - proxy
+    deploy:
       placement:
         constraints:
           - node.role == ${NODE_ROLE_1:-manager}
