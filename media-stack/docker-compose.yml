@@ -299,7 +299,7 @@ networks:
   proxy:
     external: true
   media-network:
-    driver: bridge
+    driver: overlay
 
 secrets:
   VPN_PROVIDER:
