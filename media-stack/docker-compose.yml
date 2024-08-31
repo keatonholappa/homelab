@@ -7,6 +7,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
+      - media-network
     volumes:
       - lidarr-config:/config
       - media-temp:/data # media temp files 
@@ -36,6 +37,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
+      - media-network
     volumes:
       - sonarr-config:/config
       - media-temp:/data # media temp files 
@@ -67,6 +69,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
+      - media-network
     volumes:
       - radarr-config:/config
       - media-temp:/data # media temp files 
@@ -110,6 +113,7 @@ services:
   #     - SYS_ADMIN
   #   networks:
   #     - proxy
+  #     - media-network
   #   volumes:
   #     - tdarr-config:/app/server
   #     - tdarr-config:/app/configs
@@ -171,6 +175,7 @@ services:
       - VPN_PASSWORD
     networks:
       - proxy
+      - media-network
     ports:
       - "58946:58946"
       - "58946:58946/udp"
@@ -209,6 +214,7 @@ services:
       - prowlarr-config:/config
     networks:
       - proxy
+      - media-network
     # ports:
     #   - 9696:9696
     deploy:
@@ -238,6 +244,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy 
+      - media-network
   #  ports:
   #   - 5055:5055
     volumes:
@@ -271,6 +278,7 @@ services:
       - homarr-data:/data
     networks:
       - proxy
+      - media-network
     deploy:
       placement:
         constraints:
@@ -293,6 +301,8 @@ services:
 networks:
   proxy:
     external: true
+  media-network:
+    driver: bridge
 
 secrets:
   VPN_PROVIDER:
