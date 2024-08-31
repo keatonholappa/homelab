@@ -31,7 +31,7 @@ services:
       - "traefik.docker.network=proxy"
 
   sonarr:
-    image: binhex/arch-sonarr${SONARR_TAG:-latest}
+    image: binhex/arch-sonarr:${SONARR_TAG:-latest}
     environment:
       - TZ=America/New_York
     networks:
