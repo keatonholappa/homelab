@@ -185,7 +185,7 @@ services:
       resources:
         limits:
           memory: ${MEMORY_LIMIT:-1.0G}
-        placement:
+      placement:
         constraints:
           - node.role == ${NODE_ROLE_2:-manager}
       labels:
