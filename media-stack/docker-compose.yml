@@ -184,7 +184,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 8.0G
+          memory: ${MEMORY_LIMIT:-1.0G}
         placement:
         constraints:
           - node.role == ${NODE_ROLE_2:-manager}
