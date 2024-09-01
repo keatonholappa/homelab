@@ -169,7 +169,6 @@ services:
       # - VPN_OUTPUT_PORTS=5678
       - DEBUG=true
       - UMASK=000
-
     networks:
       - proxy
       - media-network
@@ -183,7 +182,10 @@ services:
       - media-temp:/data # media temp files
       - /etc/localtime:/etc/localtime:ro
     deploy:
-      placement:
+      resources:
+        limits:
+          memory: 8.0G
+        placement:
         constraints:
           - node.role == ${NODE_ROLE_2:-manager}
       labels:
