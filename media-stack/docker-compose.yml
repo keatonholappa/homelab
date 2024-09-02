@@ -7,7 +7,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
-      - media-network
+      - media-net
     volumes:
       - lidarr-config:/config
       - media-temp:/data # media temp files 
@@ -37,7 +37,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
-      - media-network
+      - media-net
     volumes:
       - sonarr-config:/config
       - media-temp:/data # media temp files 
@@ -69,7 +69,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy
-      - media-network
+      - media-net
     volumes:
       - radarr-config:/config
       - media-temp:/data # media temp files 
@@ -113,7 +113,7 @@ services:
   #     - SYS_ADMIN
   #   networks:
   #     - proxy
-  #     - media-network
+  #     - media-net
   #   volumes:
   #     - tdarr-config:/app/server
   #     - tdarr-config:/app/configs
@@ -171,7 +171,7 @@ services:
       - UMASK=000
     networks:
       - proxy
-      - media-network
+      - media-net
     ports:
       - "58946:58946"
       - "58946:58946/udp"
@@ -212,7 +212,7 @@ services:
       - prowlarr-config:/config
     networks:
       - proxy
-      - media-network
+      - media-net
     # ports:
     #   - 9696:9696
     deploy:
@@ -241,7 +241,7 @@ services:
       - TZ=America/New_York
     networks:
       - proxy 
-      - media-network
+      - media-net
   #  ports:
   #   - 5055:5055
     volumes:
@@ -274,7 +274,7 @@ services:
       - homarr-data:/data
     networks:
       - proxy
-      - media-network
+      - media-net
     deploy:
       placement:
         constraints:
@@ -295,7 +295,7 @@ services:
       - "traefik.docker.network=proxy"  
   
 networks:
-  media-network:
+  media-net:
     driver: overlay
   proxy:
     external: true
