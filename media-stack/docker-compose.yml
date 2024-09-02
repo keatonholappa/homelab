@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.6'
 
 services:  
   lidarr:
@@ -295,10 +295,10 @@ services:
       - "traefik.docker.network=proxy"  
   
 networks:
-  proxy:
-    external: true
   media-network:
     driver: overlay
+  proxy:
+    external: true
 
 volumes:
   lidarr-config:
