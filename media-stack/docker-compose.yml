@@ -348,31 +348,31 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/qBittorrent/"  
+        device: "/${ROOT_DIR:-/nfs}/media-stack/qBittorrent/"  
   homarr-data:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/homarr"
+        device: "/${ROOT_DIR:-/nfs}/homarr"
   homarr-icons:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/homarr/icons"
+        device: "/${ROOT_DIR:-/nfs}/homarr/icons"
   homarr-configs:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/homarr/configs"   
+        device: "/${ROOT_DIR:-/nfs}/homarr/configs"   
   jellyseer_config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/jellyseer"
+        device: "/${ROOT_DIR:-/nfs}/media-stack/jellyseer"
 
   # media files hosted on Mediaserver
   media-temp:
