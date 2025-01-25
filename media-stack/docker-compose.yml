@@ -306,85 +306,85 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/lidarr/"
+        device: ":/${VOLUME_DIR:-nfs}/lidarr/"
   sonarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/sonarr/"
+        device: ":/${VOLUME_DIR:-nfs}/sonarr/"
   radarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/radarr/"      
+        device: ":/${VOLUME_DIR:-nfs}/radarr/"      
   prowlarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/prowlarr/"        
+        device: ":/${VOLUME_DIR:-nfs}/prowlarr/"        
   # tdarr-config:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/${ROOT_DIR:-nfs}/media-stack/tdarr/configs"        
+  #       device: "/${VOLUME_DIR:-nfs}/tdarr/configs"        
   # tdarr-server:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/${ROOT_DIR:-nfs}/media-stack/tdarr/server"      
+  #       device: "/${VOLUME_DIR:-nfs}/tdarr/server"      
   # tdarr-logs:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/${ROOT_DIR:-nfs}/media-stack/tdarr/logs"      
+  #       device: "/${VOLUME_DIR:-nfs}/tdarr/logs"      
   qBittorrentVpn-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/qBittorrent/"  
+        device: ":/${VOLUME_DIR:-nfs}/qBittorrent/"  
   homarr-data:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/homarr"
+        device: ":/${VOLUME_DIR:-nfs}/homarr"
   homarr-icons:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/homarr/icons"
+        device: ":/${VOLUME_DIR:-nfs}/homarr/icons"
   homarr-configs:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/homarr/configs"   
+        device: ":/${VOLUME_DIR:-nfs}/homarr/configs"   
   jellyseer_config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/${ROOT_DIR:-nfs}/media-stack/jellyseer"
+        device: ":/${VOLUME_DIR:-nfs}/jellyseer"
 
   # media files hosted on Mediaserver
   media-temp:
     driver: local
     driver_opts:
-        type: nfs4
-        o: addr=${NAS_IP},rw
-        device: ":/${MEDIA_DIR:-mnt/media}/temp/"
+        type: none
+        o: bind
+        device: ":/${MEDIA_DIR:-media}/temp/"
 
   media-source:
     driver: local
     driver_opts:
-        type: nfs4
-        o: addr=${NAS_IP},rw
-        device: ":/${MEDIA_DIR:-mnt/media}/source/"
+        type: none
+        o: bind
+        device: ":/${MEDIA_DIR:-media}/source/"
