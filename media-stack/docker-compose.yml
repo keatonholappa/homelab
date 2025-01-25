@@ -306,43 +306,43 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/lidarr/"
+        device: "/${ROOT_DIR:-/nfs}/media-stack/lidarr/"
   sonarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/sonarr/"
+        device: "/${ROOT_DIR:-/nfs}/media-stack/sonarr/"
   radarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/radarr/"      
+        device: "/${ROOT_DIR:-/nfs}/media-stack/radarr/"      
   prowlarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: "/nfs/media-stack/prowlarr/"        
+        device: "/${ROOT_DIR:-/nfs}/media-stack/prowlarr/"        
   # tdarr-config:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/nfs/media-stack/tdarr/configs"        
+  #       device: "/${ROOT_DIR:-/nfs}/media-stack/tdarr/configs"        
   # tdarr-server:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/nfs/media-stack/tdarr/server"      
+  #       device: "/${ROOT_DIR:-/nfs}/media-stack/tdarr/server"      
   # tdarr-logs:
   #   driver: local
   #   driver_opts:
   #       type: none
   #       o: addr= bind
-  #       device: "/nfs/media-stack/tdarr/logs"      
+  #       device: "/${ROOT_DIR:-/nfs}/media-stack/tdarr/logs"      
   qBittorrentVpn-config:
     driver: local
     driver_opts:
@@ -380,11 +380,11 @@ volumes:
     driver_opts:
         type: nfs4
         o: addr=${NAS_IP},rw
-        device: ":/mnt/user/Media/temp/"
+        device: ":/${ROOT_DIR:-/nfs}/temp/"
 
   media-source:
     driver: local
     driver_opts:
         type: nfs4
         o: addr=${NAS_IP},rw
-        device: ":/mnt/user/Media/source/"
+        device: ":/${ROOT_DIR:-/nfs}/source/"
