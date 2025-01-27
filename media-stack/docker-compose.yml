@@ -306,25 +306,25 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/lidarr"
+        device: "/${VOLUME_DIR:-nfs}/lidarr"
   sonarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/sonarr"
+        device: "/${VOLUME_DIR:-nfs}/sonarr"
   radarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/radarr"      
+        device: "/${VOLUME_DIR:-nfs}/radarr"      
   prowlarr-config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/prowlarr"        
+        device: "/${VOLUME_DIR:-nfs}/prowlarr"        
   # tdarr-config:
   #   driver: local
   #   driver_opts:
@@ -348,31 +348,31 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/qBittorrent"  
+        device: "/${VOLUME_DIR:-nfs}/qBittorrent"  
   homarr-data:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/homarr"
+        device: "/${VOLUME_DIR:-nfs}/homarr"
   homarr-icons:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/homarr/icons"
+        device: "/${VOLUME_DIR:-nfs}/homarr/icons"
   homarr-configs:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/homarr/configs"   
+        device: "/${VOLUME_DIR:-nfs}/homarr/configs"   
   jellyseer_config:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${VOLUME_DIR:-nfs}/jellyseer"
+        device: "/${VOLUME_DIR:-nfs}/jellyseer"
 
   # media files hosted on Mediaserver
   media-temp:
@@ -380,11 +380,11 @@ volumes:
     driver_opts:
         type: none
         o: bind
-        device: ":/${MEDIA_DIR:-media}/temp"
+        device: "/${MEDIA_DIR:-media}/temp"
 
   media-source:
     driver: local
     driver_opts:
         type: none
         o: bind
-        device: ":/${MEDIA_DIR:-media}/source"
+        device: "/${MEDIA_DIR:-media}/source"
