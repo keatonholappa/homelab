@@ -162,8 +162,8 @@ services:
       #- STRICT_PORT_FORWARD=yes
       - ENABLE_PRIVOXY=no
       - ENABLE_STARTUP_SCRIPTS=yes
-      - LAN_NETWORK=10.16.0.0/24,10.1.10.0/24,10.1.20.0/24
-      - WEBUI_PORT=8082
+      - LAN_NETWORK = ${LAN_NETWORK:-192.168.1.0/24}
+      - WEBUI_PORT=${WEBUI_PORT:-8081}
       - 'NAME_SERVERS=84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1'
       # - VPN_INPUT_PORTS=1234
       # - VPN_OUTPUT_PORTS=5678
@@ -175,7 +175,7 @@ services:
     ports:
       - "58946:58946"
       - "58946:58946/udp"
-      - "8082:8082"
+      - "${WEBUI_PORT:-8081}:${WEBUI_PORT:-8081}"
       - "8118:8118"
     volumes:
       - qBittorrentVpn-config:/config
